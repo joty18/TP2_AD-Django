@@ -3,7 +3,7 @@ from django.db import models
 
 
 
-
+# Olá Tiago
 
 class Utilizador(User):
     nome = models.CharField(max_length=200)
