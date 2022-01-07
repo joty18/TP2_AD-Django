@@ -62,7 +62,6 @@ class Medicamento(models.Model):
     estado_autorizacao = models.BooleanField()
     generico = models.BooleanField()
     titular_AIM = models.CharField(max_length=200) #isto devia ser foreign key mas temos de arrranjar um maneira de converter
-    #titular_AIM = models.ForeignKey(Fornecedor, on_delete=models.CASCADE, null=True)
     #slug = models.CharField(max_length=200)
     #stock = models.PositiveIntegerField(default=0)
 
