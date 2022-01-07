@@ -78,6 +78,10 @@ class Outro_Artigo(models.Model):
     def __str__(self):
         return f"{self.id_artigo} - {self.nome_artigo}"
 
+class StockMed(models.Model):
+    medicamento = models.ForeignKey(Medicamento,on_delete=models.CASCADE)
+    quantidade = models.CharField(max_length=200)
+
 class Ato_Medico(models.Model):
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
     utente = models.ForeignKey(Utente, on_delete=models.CASCADE)
