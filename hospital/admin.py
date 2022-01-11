@@ -18,8 +18,8 @@ class MedicamentoAdmin(admin.ModelAdmin):
 
 @admin.register(Outro_Artigo)
 class OutroArtigoAdmin(admin.ModelAdmin):
-    list_display = ['id_artigo', 'nome_artigo', 'titular_AIM', 'stock']
-    search_fields = ('nome_artigo', 'titular_AIM')
+    list_display = [ 'nome_artigo', 'fornecedor',]
+    search_fields = ('nome_artigo', 'fornecedor')
     ordering = ('nome_artigo',)
 
 
@@ -94,11 +94,6 @@ class FarmaceuticoAdmin(UserAdmin):
             'password2', 'groups')}
          ),
     )
-@admin.register(Fornecedor)
-class FornecedorAdmin(admin.ModelAdmin):
-    list_display = ['makername']
-    search_fields = ('makername',)
-    ordering = ('makername',)
 
 @admin.register(Ato_Medico)
 class AtoMedicoAdmin(admin.ModelAdmin):

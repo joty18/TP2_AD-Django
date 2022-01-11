@@ -21,6 +21,9 @@ from hospital import views
 
 router = routers.DefaultRouter()
 router.register(r'medicamentos', views.MedicamentoViewSet)
+router.register(r'outroartigos', views.OutroArtigoViewSet)
+router.register(r'utentes', views.UtenteViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

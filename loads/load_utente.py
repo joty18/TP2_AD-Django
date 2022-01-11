@@ -1,29 +1,28 @@
-from hospital.models import Utente
-import django
-from django.contrib.auth.models import Group
+import http.client
+import json
 import csv
 
-django.setup()
-
-def run():
-
-    f = open(r'C:\Users\Tiago\PycharmProjects\djangoProject\tp2\loads\utentes.txt', encoding="utf8")
-
-    csvr = csv.reader(f, delimiter = ':')
+from tp2.hospital.models import Utente
 
 
-    my_group = Group.objects.get(name='Utentes')
+def get(conn, req):
+    conn.request("GET", req)
+    return conn.getresponse()
 
-    for ut in csvr:
-        try:
-            bilhete_identidade = ut[1]
-            u = Utente(nome=ut[0], bi=bilhete_identidade, NIF=ut[2], morada=ut[3],
-                       codigo_postal=ut[4], username=ut[2])
+conn = http.client.HTTPConnection("127.0.0.1",8000)
+headers = {'Content-type': 'application/json'}
+f = open(r'C:\Users\user\Downloads\tp2\tp2\loads\utentes.csv', encoding='latin-1')
+csvr = csv.DictReader(f, delimiter=';', quoting=csv.QUOTE_ALL)
 
-            psw = ut[2]+'utente'
-            u.set_password(psw)
-            u.save()
+for l in csvr:
+        data = {
+            Utente.nome: l['Nome'],
+            Utente.bi: l['BI'],
+            Utente.NIF: l['NIF'],
+            Utente.morada: l['Morada'],
+            Utente.codigo_postal: l['Codigo Postal']
 
-            my_group.user_set.add(u)
-        except:
-            pass #ma pratica
+        }
+conn.request("POST", '/utentes/', json.dumps(data), headers=headers)
+r = conn.getresponse()
+print(r.status, r.reason, r.read())

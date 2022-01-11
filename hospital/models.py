@@ -1,8 +1,5 @@
-from django.contrib.auth.models import User, UserManager
+from django.contrib.auth.models import User, UserManager, AbstractUser
 from django.db import models
-
-
-
 
 
 class Utilizador(User):
@@ -39,15 +36,8 @@ class Farmaceutico(Utilizador):
     def __str__(self):
         return f"Nome : {self.nome}, bi : {self.bi}"
 
-class Fornecedor(models.Model):
-    makername = models.CharField(max_length=200, default='')
 
-    class Meta:
-        ordering = ('makername',)
-    def __str__(self):
-        return f"Nome : {self.makername}"
-
-class Utente (Utilizador):
+class Utente(Utilizador):
 
     class Meta:
         ordering = ('nome',)
@@ -70,13 +60,11 @@ class Medicamento(models.Model):
         return f"{self.dci} - {self.nome_medicamento}"
 
 class Outro_Artigo(models.Model):
-    id_artigo = models.CharField(max_length=200)
     nome_artigo = models.CharField(max_length=200)
-    titular_AIM = models.ForeignKey(Fornecedor, on_delete=models.CASCADE)
-    stock = models.PositiveIntegerField(default=0)
+    fornecedor = models.CharField(max_length=200)
 
     def __str__(self):
-        return f"{self.id_artigo} - {self.nome_artigo}"
+        return f"{self.nome_artigo} - {self.fornecedor}"
 
 class Ato_Medico(models.Model):
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE)
