@@ -4,34 +4,44 @@ from .models import *
 class MedicamentoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Medicamento
-        fields = '_all_'
+        fields = '__all__'
 
 class OutroArtigoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Outro_Artigo
-        fields = '_all_'
+        fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '_all_'
+        fields = '__all__'
 
 class UtenteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Utente
-        fields = '_all_'
+        fields = '__all__'
 
 class MedicoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Medico
-        fields = '_all_'
+        fields = '__all__'
 
 class FarmaceuticoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Farmaceutico
-        fields = '_all_'
+        fields = '__all__'
 
 class EnfermeiroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enfermeiro
-        fields = '_all_'
+        fields = '__all__'
+
+class Stock_medSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stock_med
+        fields = '__all__'
+
+class Stock_artSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stock_art
+        fields = '__all__'

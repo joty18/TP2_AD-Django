@@ -107,7 +107,10 @@ class Ato_Farmaceutico(models.Model):
         return f"Médico : {self.farmaceutico.nome}, Hora : {self.hora}, Medicamento : {self.quant_med, self.medicamento}," \
                f"Outros Artigos : {self.quant_art, self.outro_artigo}"
 
-class Stock(models.Model):
+class Stock_med(models.Model):
     id_med = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
+    quant = models.PositiveIntegerField()
+
+class Stock_art(models.Model):
     id_art = models.ForeignKey(Outro_Artigo, on_delete=models.CASCADE)
-    quant = models.IntegerField()
+    quant = models.PositiveIntegerField()

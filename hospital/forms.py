@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from .models import *
 
@@ -45,6 +46,19 @@ class UtenteCreationForm(forms.ModelForm):
             user.save()
 
         return user
+
+class UtenteChangeForm(forms.ModelForm):
+
+    password = ReadOnlyPasswordHashField()
+
+    class Meta:
+        model = Utente
+        fields = ('username', 'nome','bi','NIF','morada','codigo_postal',)
+
+    def clean_password(self):
+
+        return self.initial['password']
+
 
 class EnfermeiroCreationForm(forms.ModelForm):
 
@@ -117,3 +131,10 @@ class FarmaceuticoCreationForm(forms.ModelForm):
             user.save()
 
         return user
+
+    #---------------------------------------------
+
+class FormStock_med(forms.ModelForm):
+    class Meta:
+        model = Stock_med
+        fields = ['id_med', 'quant']

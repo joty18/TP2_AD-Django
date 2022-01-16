@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.views.generic import TemplateView
 
 from rest_framework import routers
 from hospital import views
@@ -26,9 +27,14 @@ router.register(r'utentes', views.UtenteViewSet)
 router.register(r'medicos', views.MedicoViewSet)
 router.register(r'farmaceuticos', views.FarmaceuticoViewSet)
 router.register(r'enfermeiros', views.EnfermeiroViewSet)
+router.register(r'stock_med', views.Stock_medViewSet)
+router.register(r'stock_art', views.Stock_artViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('hospital/', include('hospital.urls')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

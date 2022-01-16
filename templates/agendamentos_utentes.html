@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <title>Menu Utente | Agendamentos </title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+ {% for group in user.groups.all %}
+    {% if group.name == 'Utentes'  %}
+        <body>
+            <div class="w3-panel w3-green">
+              <h3>Menu Utente | Consultar Agendamentos</h3>
+            </div>
+            <ul>
+                {% csrf_token %}
+                <h4><b>Agendamentos:</b></h4><br>
+                {% for a in agenda %}
+                <ul><li>{% for key, value in a.items %}
+                    <b>{{key}}</b> : {{value}};
+                    {% endfor %}</li></ul><br>
+                {% endfor %}
+                <br><br>
+                <p><a href="/hospital/menuutente">Voltar atrás</a> | <a href="/hospital/logout">Fazer logout</a></p>
+            </ul>
+        </body>
+    {% else %}
+        <body>
+            <div class="w3-panel w3-green">
+                <h3>Não tem acesso a esta página.</h3>
+            </div>
+            <br/>
+            <a href="/hospital/logout" class="w3-bar-item w3-button w3-light-grey">Logout e redirecionamento para login</a>
+        </body>
+    {% endif %}
+{% endfor %}
+</html>
