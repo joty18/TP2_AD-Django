@@ -18,7 +18,7 @@ class Medico(Utilizador):
 
     class Meta:
         ordering = ('nome',)
-    def __str__(self):
+    def _str_(self):
         return f"Nome : {self.nome}, bi : {self.bi}"
 
 class Enfermeiro(Utilizador):
@@ -26,14 +26,14 @@ class Enfermeiro(Utilizador):
 
     class Meta:
         ordering = ('nome',)
-    def __str__(self):
+    def _str_(self):
         return f"Nome : {self.nome}, bi : {self.bi}"
 
 class Farmaceutico(Utilizador):
 
     class Meta:
         ordering = ('nome',)
-    def __str__(self):
+    def _str_(self):
         return f"Nome : {self.nome}, bi : {self.bi}"
 
 
@@ -41,7 +41,7 @@ class Utente(Utilizador):
 
     class Meta:
         ordering = ('nome',)
-    def __str__(self):
+    def _str_(self):
         return f"Nome : {self.nome}, bi : {self.bi}"
 
 class Medicamento(models.Model):
@@ -56,14 +56,14 @@ class Medicamento(models.Model):
     #slug = models.CharField(max_length=200)
     #stock = models.PositiveIntegerField(default=0)
 
-    def __str__(self):
+    def _str_(self):
         return f"{self.dci} - {self.nome_medicamento}"
 
 class Outro_Artigo(models.Model):
     nome_artigo = models.CharField(max_length=200)
     fornecedor = models.CharField(max_length=200)
 
-    def __str__(self):
+    def _str_(self):
         return f"{self.nome_artigo} - {self.fornecedor}"
 
 class Ato_Medico(models.Model):
@@ -78,7 +78,7 @@ class Ato_Medico(models.Model):
     class Meta:
         ordering = ('hora',)
 
-    def __str__(self):
+    def _str_(self):
         return f"Médico : {self.medico.nome}, Utente : {self.utente.nome}, Hora : {self.hora}" \
                f", Medicamento : {self.quant_med, self.medicamento}, Outros Artigos : {self.quant_art, self.outro_artigo}"
 
@@ -91,7 +91,7 @@ class Ato_Enfermagem(models.Model):
     quant_art = models.CharField(max_length=200)
     outro_artigo = models.ForeignKey(Outro_Artigo, on_delete=models.SET_NULL, null=True)
 
-    def __str__(self):
+    def _str_(self):
         return f"Médico : {self.enfermeiro.nome}, Utente : {self.utente.nome}, Hora : {self.hora}" \
                f", Medicamento : {self.quant_med, self.medicamento}, Outros Artigos : {self.quant_art, self.outro_artigo}"
 
@@ -103,6 +103,11 @@ class Ato_Farmaceutico(models.Model):
     quant_art = models.CharField(max_length=200)
     outro_artigo = models.ForeignKey(Outro_Artigo, on_delete=models.SET_NULL, null=True)
 
-    def __str__(self):
+    def _str_(self):
         return f"Médico : {self.farmaceutico.nome}, Hora : {self.hora}, Medicamento : {self.quant_med, self.medicamento}," \
-               f" Outros Artigos : {self.quant_art, self.outro_artigo}"
+               f"Outros Artigos : {self.quant_art, self.outro_artigo}"
+
+class Stock(models.Model):
+    id_med = models.ForeignKey(Medicamento, on_delete=models.CASCADE)
+    id_art = models.ForeignKey(Outro_Artigo, on_delete=models.CASCADE)
+    quant = models.IntegerField()

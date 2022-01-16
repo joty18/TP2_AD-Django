@@ -7,7 +7,7 @@ def get(conn, req):
 
 conn = http.client.HTTPConnection("127.0.0.1",8000)
 headers = {'Content-type': 'application/json'}
-f= open(r'C:\Users\user\Downloads\tp2\tp2\loads\lista_infomed.csv', encoding='latin-1')
+f= open(r'C:\Users\Tiago\PycharmProjects\djangoProject\tp2\loads\lista_infomed.csv', encoding='latin-1')
 csvr = csv.DictReader(f, delimiter=';', quoting=csv.QUOTE_ALL)
 for l in csvr:
     data = {

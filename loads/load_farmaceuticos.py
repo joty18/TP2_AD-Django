@@ -8,12 +8,12 @@ def get(conn, req):
 
 conn = http.client.HTTPConnection("127.0.0.1",8000)
 headers = {'Content-type': 'application/json'}
-f = open(r'C:\Users\user\Downloads\tp2ad\tp2ad\loads\utentes.csv', encoding='latin-1')
+f = open(r'C:\Users\user\Downloads\tp2ad\tp2ad\loads\farmaceuticos.csv', encoding='latin-1')
 csvr = csv.DictReader(f, delimiter=';', quoting=csv.QUOTE_ALL)
 
 for index,u in enumerate(csvr):
     ut = {
-            'username': 'user'+str(index),
+            'username': 'farm'+str(index),
             'password': 'a',
             'nome': u['Nome'],
             'bi': u['BI'],
@@ -21,6 +21,6 @@ for index,u in enumerate(csvr):
             'morada': u['Morada'],
             'codigo_postal': u['Codigo postal']
         }
-    conn.request("POST", '/utentes/', json.dumps(ut), headers=headers)
+    conn.request("POST", '/farmaceuticos/', json.dumps(ut), headers=headers)
     r = conn.getresponse()
     print(r.status, r.reason, r.read())
